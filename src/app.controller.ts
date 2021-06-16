@@ -11,13 +11,13 @@ export class AppController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   login(@Request() req): any {
-    return req.user; 
+    return {msg: 'Logged in!'}; 
   }
 
   // GET/ protected
   @UseGuards(AuthenticatedGuard)
   @Get('protected')
-  getHello(): string {
-    return this.appService.getHello();
+  getHello(@Request() req): string {
+    return req.user
   }
 }

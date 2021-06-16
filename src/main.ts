@@ -9,12 +9,9 @@ async function bootstrap() {
   app.use(
     session({
       resave:false,
-      saveUniitialized: false, 
+      saveUninitialized: false, 
       secret: 'keyboard cat',
-      cookie: {
-        httpOnly: true,
-        secure: false,
-      }
+      cookie: {maxAge:3600000},
     })
   );
 
