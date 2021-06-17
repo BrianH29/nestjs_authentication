@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 import { AuthService } from "./auth/auth.service";
 import { LocalAuthGuard } from "./auth/local-auth.guard";
 import { AuthenticatedGuard } from './auth/authenticated.guard';
+import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 
 @Controller()
 export class AppController {
@@ -15,9 +16,10 @@ export class AppController {
     return this.authService.login(req.user);  // TODO: return JWT access token
   }
 
-  // GET/ protected
-  // @Get('protected')
-  // getHello(@Request() req): string { // TODO: require an Bearer token, validate token
-  //   return req.user
-  // }
+  //GET/ protected
+  @UseGuards(JwtAuthGuard)
+  @Get('protected')
+  getHello(@Request() req): string { // TODO: require an Bearer token, validate token
+    return req.user
+  }
 }
